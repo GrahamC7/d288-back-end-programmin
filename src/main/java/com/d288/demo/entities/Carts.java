@@ -27,4 +27,6 @@ public class Carts {
     private Date last_update;
 
     private Customer customer;
+
+    private Set<Cartitem> cartItem;
 }
