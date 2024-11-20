@@ -1,4 +1,5 @@
 package com.d288.demo.entities;
 
-public class StatusType {
+public enum StatusType {
+    PENDING, ORDERED, CANCELED
 }
