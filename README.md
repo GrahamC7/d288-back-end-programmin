@@ -89,6 +89,7 @@ D.   Write code for the entities package that includes entity classes and the en
 17. Added lines 1-33 to Vacation.java
 18. Added getters, setters, enums for all entity files.
 19. StatusType.java, changed class to enum, added Line 4
+20. Cart.java, added line 38 - enumerated, added lines 54 and 55
 
 
 E.   Write code for the dao package that includes repository interfaces for the entities that extend JpaRepository, and add cross-origin support.

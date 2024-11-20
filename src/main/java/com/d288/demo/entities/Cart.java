@@ -1,12 +1,16 @@
 package com.d288.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,6 +18,7 @@ import java.util.Set;
 @Data
 @Getter
 @Setter
+
 public class Cart {
 
     @Id
@@ -30,21 +35,25 @@ public class Cart {
     @Column(name = "party_size")
     private int party_size;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatusType status;
 
     @Column(name = "create_date")
+    @CreationTimestamp
     private Date create_date;
 
     @Column(name = "last_update")
+    @UpdateTimestamp
     private Date last_update;
 
-    @Column(name = "customer_id")
+    @JoinColumn(name = "customer_id")
     @ManyToOne
     private Customer customer;
 
-    @OneToMany
-    private Set<CartItem> cartItem;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<CartItem> cartItem = new HashSet<>();
 
     public Cart(){
 
