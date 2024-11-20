@@ -29,9 +29,18 @@ public class Division {
     @Column(name = "last_update")
     private Date last_update;
 
-    @Column(name = "country_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
+
+    @Column(name = "country_id")
+    private long country_id;
+
+    // TODO fix for front end not populating division
+    public void setCountry(Country country) {
+        setCountry_id(country.getId());
+        this.country = country;
+    }
 
     public Division(){
 
