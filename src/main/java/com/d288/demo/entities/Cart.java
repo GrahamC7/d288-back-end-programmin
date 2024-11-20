@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "cart")
 @Data
-public class Carts {
+public class Cart {
 
     private Long id;
 
