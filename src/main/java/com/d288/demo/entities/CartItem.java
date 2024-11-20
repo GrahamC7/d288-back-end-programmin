@@ -1,6 +1,6 @@
 package com.d288.demo.entities;
 
-package com.d288.demo.entities;import jakarta.persistence.Entity;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "cartitem")
+@Table(name = "cartItem")
 @Data
 
 
