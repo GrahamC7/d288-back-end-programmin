@@ -42,7 +42,12 @@ public class Division {
         this.country = country;
     }
 
-    public Division(){
-
+    public Division(String url){
+        // this extracts the portion of the url containing the division id
+        // url might look something like
+        // http://localhost:8080/api/divisions/102
+        // the division id is 102
+        String divisionId = url.substring(url.lastIndexOf('/')+1);
+        this.id = Long.parseLong(divisionId);
     }
 }
