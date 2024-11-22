@@ -35,7 +35,7 @@ public class CartItem {
     )
     private Set<Excursion> excursions;
 
-    @Column(name = "cart_id")
+    @JoinColumn(name = "cart_id")
     @ManyToOne
     private Cart cart;
 

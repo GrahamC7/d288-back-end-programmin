@@ -74,6 +74,9 @@ D.   Write code for the entities package that includes entity classes and the en
 E.   Write code for the dao package that includes repository interfaces for the entities that extend JpaRepository, and add cross-origin support.
 
 
+22. 
+
+
 F.   Write code for the services package that includes each of the following:
 •    a purchase data class with a customer cart and a set of cart items
 •    a purchase response data class that contains an order tracking number
