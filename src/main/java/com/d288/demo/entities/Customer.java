@@ -1,9 +1,12 @@
 package com.d288.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
@@ -37,16 +40,19 @@ public class Customer {
     private String phone;
 
     @Column(name = "create_date")
+    @CreationTimestamp
     private Date create_date;
 
     @Column(name = "last_update")
+    @UpdateTimestamp
     private Date last_update;
 
-    @Column(name = "division_id")
+    @JoinColumn(name = "division_id", referencedColumnName = "division_id")
     @ManyToOne
     private Division division;
 
-    @OneToMany
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Cart> carts;
 
     public Customer(){

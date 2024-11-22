@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,7 +24,7 @@ public class Vacation {
     @Column(name = "vacation_id")
     private Long id;
 
-    @Column(name = "vacation")
+    @Column(name = "vacation_title")
     private String vacation_title;
 
     @Column(name = "description")
@@ -35,12 +37,14 @@ public class Vacation {
     private String image_URL;
 
     @Column(name = "create_date")
+    @CreationTimestamp
     private Date create_date;
 
     @Column(name = "last_update")
+    @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany
+    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL)
     private Set<Excursion> excursions;
 
     public Vacation(){
