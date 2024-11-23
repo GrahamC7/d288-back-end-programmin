@@ -1,37 +1,35 @@
 package com.d288.demo.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "divisions")
+@Data
 @Getter
 @Setter
-@NoArgsConstructor
 
 public class Division {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "division_id", nullable = false)
+    @Column(name = "division_id")
     private Long id;
 
-    @Column(name = "division", nullable = false)
+    @Column(name = "division")
     private String division_name;
 
-    @Column(name = "create_date", nullable = false)
+    @Column(name = "create_date")
     @CreationTimestamp
     private Date create_date;
 
-    @Column(name = "last_update", nullable = false)
+    @Column(name = "last_update")
     @UpdateTimestamp
     private Date last_update;
 
@@ -39,8 +37,8 @@ public class Division {
     @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
-    @Column(name = "country_id", nullable = false)
-    private Long country_id;
+    @Column(name = "country_id")
+    private long country_id;
 
     // TODO fix for front end not populating division
     public void setCountry(Country country) {
@@ -56,7 +54,4 @@ public class Division {
         String divisionId = url.substring(url.lastIndexOf('/')+1);
         this.id = Long.parseLong(divisionId);
     }
-
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
-    private Set<Customer> customers = new HashSet<>();
 }

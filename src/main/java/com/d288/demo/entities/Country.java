@@ -4,18 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "countries")
-@NoArgsConstructor
+@Data
 @Getter
 @Setter
 
@@ -23,16 +21,13 @@ public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id", nullable = false
-    )
+    @Column(name = "country_id")
     private Long id;
 
-    @Column(name = "country", nullable = false
-    )
+    @Column(name = "country")
     private String country_name;
 
-    @Column(name = "create_date", nullable = false
-    )
+    @Column(name = "create_date")
     @CreationTimestamp
     private Date create_date;
 
@@ -40,6 +35,11 @@ public class Country {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(fetch =FetchType.LAZY, mappedBy = "country", cascade = CascadeType.ALL)
-    private Set<Division> divisions = new HashSet<>();
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Division> divisions;
+
+    public Country(){
+
+    }
 }

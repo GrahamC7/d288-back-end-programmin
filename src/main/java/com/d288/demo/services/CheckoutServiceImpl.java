@@ -4,7 +4,6 @@ import com.d288.demo.dao.CartRepository;
 import com.d288.demo.dao.CustomerRepository;
 import com.d288.demo.entities.Cart;
 import com.d288.demo.entities.CartItem;
-import com.d288.demo.entities.Customer;
 import com.d288.demo.entities.StatusType;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +29,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         // data retrieval
         Cart cart = purchase.getCart();
-        Customer customer = purchase.getCustomer();
         Set<CartItem> cartItems = purchase.getCartItems();
-        String orderTrackingNumber = generateOrderTrackingNumber();
 
         // order confirmation error message
         if (cartItems.isEmpty()){
@@ -40,26 +37,22 @@ public class CheckoutServiceImpl implements CheckoutService {
         }
 
         // item association
-        cartItems.forEach(item -> {
-            item.setCart(cart);
-            cart.add(item);
-        });
+        cartItems.forEach(cart::add);
 
         // tracking number generation
+        String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
+
         // setting cart status to ordered
         cart.setStatus(StatusType.ordered);
-        customer.add(cart);
 
-        // saving cart and customer
+        // saving cart
         cartRepository.save(cart);
-        customerRepository.save(customer);
 
         return new PurchaseResponse(orderTrackingNumber);
     }
 
     private String generateOrderTrackingNumber() {
-
         return UUID.randomUUID().toString();
     }
 }
