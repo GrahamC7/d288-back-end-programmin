@@ -58,14 +58,5 @@ public class Customer {
 
     public Customer() {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public void add(Cart cart) {
-        carts.add(cart);
-=======
-    public Customer(){
->>>>>>> parent of ca61e94 (Created package bootstrap, created bootstrap>BootStrapData.java, added five sample customers to BootStrapData.java and added constructor to Customer.java)
-=======
->>>>>>> parent of 8e71dc6 (bug fixes)
     }
 }
