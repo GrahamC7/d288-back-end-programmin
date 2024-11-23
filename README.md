@@ -107,9 +107,6 @@ I.   Add five sample customers to the application programmatically.
 Note: Make sure the customer information is not overwritten each time you run the application.
 
 
-28. Created package bootstrap, created bootstrap>BootStrapData.java, added five sample customers to BootStrapData.java and added constructor to Customer.java
-
-
 J.   Run your integrated application by adding a customer order for a vacation with two excursions using the unmodified Angular front-end. Provide screenshots for the following:
 
 •    that your application does not generate a network error when adding the data

@@ -56,7 +56,11 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Cart> carts = new HashSet<>();
 
+<<<<<<< HEAD
     public void add(Cart cart) {
         carts.add(cart);
+=======
+    public Customer(){
+>>>>>>> parent of ca61e94 (Created package bootstrap, created bootstrap>BootStrapData.java, added five sample customers to BootStrapData.java and added constructor to Customer.java)
     }
 }
