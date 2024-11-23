@@ -26,8 +26,13 @@ public class CheckoutServiceImpl implements CheckoutService {
         Cart cart = purchase.getCart();
         Set<CartItem> cartItems = purchase.getCartItems();
 
+        // order confirmation error message
+        if (cartItems.isEmpty()){
+            return new PurchaseResponse("Your cart is empty. Database has not been updated. Please add items to make a purchase.");
+        }
+
         // item association
-        cartItems.forEach(item -> cart.add(item));
+        cartItems.forEach(cart::add);
 
         // tracking number generation
         String orderTrackingNumber = generateOrderTrackingNumber();
