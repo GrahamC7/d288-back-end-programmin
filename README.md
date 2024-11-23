@@ -74,7 +74,9 @@ D.   Write code for the entities package that includes entity classes and the en
 E.   Write code for the dao package that includes repository interfaces for the entities that extend JpaRepository, and add cross-origin support.
 
 
-22. 
+22. Created dao>files: CartItemRepository.java, CartRepository.java, CountryRepository.java, Customer Repository.java, DivisionRepository.java, ExcursionRepository.java, and VacationRepository.java.
+23. Extended JpaRepository for all dao files
+24. Added cross-origin support for all dao files
 
 
 F.   Write code for the services package that includes each of the following:
