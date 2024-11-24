@@ -22,7 +22,7 @@ public class Excursion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "excursion_id", nullable = false)
+    @Column(name = "excursion_id", nullable = false, updatable = false)
     private Long id;
 
     @Column(name = "excursion_title", nullable = false)
@@ -46,7 +46,7 @@ public class Excursion {
     @JoinColumn(name = "vacation_id", nullable = false)
     private Vacation vacation_id;
 
-    @ManyToMany(mappedBy = "excursions")
+    @ManyToMany
     @JoinTable(
             name="excursion_cartitem",
             joinColumns = @JoinColumn(name = "excursion_id", nullable = false),
