@@ -44,8 +44,7 @@ public class Excursion {
 
     @ManyToOne
     @JoinColumn(name = "vacation_id", nullable = false)
-    private Vacation vacation;
-
+    private Vacation vacation_id;
 
     @ManyToMany
     @JoinTable(
