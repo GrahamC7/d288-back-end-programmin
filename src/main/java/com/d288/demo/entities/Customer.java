@@ -49,12 +49,11 @@ public class Customer {
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name = "division_id", referencedColumnName = "division_id", nullable = false
+    @JoinColumn(name = "division_id", referencedColumnName = "division_id", nullable = false, updatable = false
     )
     private Division division;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Cart> carts = new HashSet<>();
 
     public Customer(String firstName, String lastName, String address, String postal_code, String phone, Division division) {

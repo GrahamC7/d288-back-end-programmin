@@ -39,5 +39,4 @@ public class Country {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Division> divisions = new HashSet<>();
-
 }
