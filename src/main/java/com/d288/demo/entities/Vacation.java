@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "vacations")
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 
 public class Vacation {
 
@@ -45,7 +45,7 @@ public class Vacation {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(mappedBy = "vacation_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vacation_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Excursion> excursions = new HashSet<>();
 
 }
