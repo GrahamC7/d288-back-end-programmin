@@ -11,15 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/checkout")
 
 public class CheckoutController {
+    @Autowired
     private CheckoutService checkoutService;
 
-    @Autowired
-    public CheckoutController(CheckoutService checkoutService) {
-
-        this.checkoutService = checkoutService;
-    }
-
     @PostMapping("/purchase")
+    @CrossOrigin("http://localhost:4200")
     public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
         PurchaseResponse purchaseResponse = checkoutService.placeOrder(purchase);
         return purchaseResponse;
