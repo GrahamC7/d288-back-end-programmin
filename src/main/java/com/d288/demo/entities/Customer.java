@@ -2,6 +2,7 @@ package com.d288.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Customer {
 
@@ -53,7 +55,7 @@ public class Customer {
     )
     private Division division;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Cart> carts = new HashSet<>();
 
     public Customer(String firstName, String lastName, String address, String postal_code, String phone, Division division) {
