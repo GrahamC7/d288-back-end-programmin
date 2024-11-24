@@ -31,7 +31,6 @@ public class CheckoutServiceImpl implements CheckoutService {
         // data retrieval
         Cart cart = purchase.getCart();
         Customer customer = purchase.getCustomer();
-
         Set<CartItem> cartItems = purchase.getCartItems();
 
         // tracking number generation
@@ -45,7 +44,6 @@ public class CheckoutServiceImpl implements CheckoutService {
         cart.setOrderTrackingNumber(orderTrackingNumber);
         cart.setStatus(StatusType.ordered);
         customer.add(cart);
-
 
         customerRepository.save(customer);
         cartRepository.save(cart);
