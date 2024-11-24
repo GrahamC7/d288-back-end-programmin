@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "excursions")
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 
 public class Excursion {
 
@@ -42,11 +42,11 @@ public class Excursion {
     @UpdateTimestamp
     private Date last_update;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacation_id", nullable = false)
     private Vacation vacation_id;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "excursions")
     @JoinTable(
             name="excursion_cartitem",
             joinColumns = @JoinColumn(name = "excursion_id", nullable = false),
