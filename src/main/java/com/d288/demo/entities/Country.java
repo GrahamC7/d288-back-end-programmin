@@ -37,6 +37,5 @@ public class Country {
     private Date last_update;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Division> divisions = new HashSet<>();
 }
