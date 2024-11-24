@@ -2,7 +2,6 @@ package com.d288.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,7 +14,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "carts")
-@Data
 @Getter
 @Setter
 
@@ -55,10 +53,14 @@ public class Cart {
     @JsonIgnore
     private Set<CartItem> cartItem = new HashSet<>();
 
-    public Cart(){
-
-    };
-
     public void add(CartItem item) {
+        if (item != null) {
+            if (cartItem == null) {
+                cartItem = new HashSet<>();
+            }
+            cartItem.add(item);
+            System.out.println("Adding Cart: " + this);
+            item.setCart(this);
+        }
     }
 }

@@ -1,8 +1,8 @@
 package com.d288.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,9 +11,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "divisions")
-@Data
 @Getter
 @Setter
+@NoArgsConstructor
 
 public class Division {
 
@@ -46,6 +46,8 @@ public class Division {
         this.country = country;
     }
 
+    /*
+
     public Division(String url){
         // this extracts the portion of the url containing the division id
         // url might look something like
@@ -54,4 +56,7 @@ public class Division {
         String divisionId = url.substring(url.lastIndexOf('/')+1);
         this.id = Long.parseLong(divisionId);
     }
+
+     */
+
 }

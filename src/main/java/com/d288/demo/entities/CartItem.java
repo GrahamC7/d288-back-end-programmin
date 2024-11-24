@@ -1,7 +1,6 @@
 package com.d288.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,7 +11,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "cart_items")
-@Data
 @Getter
 @Setter
 
@@ -23,8 +21,8 @@ public class CartItem {
     @Column(name = "cart_item_id")
     private Long id;
 
-    @JoinColumn(name = "vacation_id", referencedColumnName = "vacation_id")
     @ManyToOne
+    @JoinColumn(name = "vacation_id", referencedColumnName = "vacation_id")
     private Vacation vacation;
 
     @ManyToMany
@@ -35,8 +33,8 @@ public class CartItem {
     )
     private Set<Excursion> excursions;
 
-    @JoinColumn(name = "cart_id")
     @ManyToOne
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
     @Column(name = "create_date")
@@ -47,7 +45,4 @@ public class CartItem {
     @UpdateTimestamp
     private Date last_update;
 
-    public CartItem(){
-
-    }
 }

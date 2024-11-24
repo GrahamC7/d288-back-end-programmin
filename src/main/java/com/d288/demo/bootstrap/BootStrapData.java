@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class BootStrapData implements CommandLineRunner {
     private final CustomerRepository customerRepository;
-
     private final DivisionRepository divisionRepository;
 
     public BootStrapData(DivisionRepository divisionRepository, CustomerRepository customerRepository) {
@@ -21,52 +20,17 @@ public class BootStrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         if (customerRepository.count() == 1) {
+            Customer customer = new Customer("Graham", "Cracker", "1234 Heresville Pl", "56789", "(123) 567-8293", divisionRepository.findById(31L).get());
+            Customer customer2 = new Customer("Bethany", "Howl", "900 Therestown Blvd", "92940", "(938) 849-8349", divisionRepository.findById(32L).get());
+            Customer customer3 = new Customer("Edna", "Mae", "4829 VeryFarAway Ave", "92380", "(994) 739-9374", divisionRepository.findById(103L).get());
+            Customer customer4 = new Customer("Samuel", "Tee", "80 WhereEvenIsThat Rd", "27291", "(759) 489-2901", divisionRepository.findById(47L).get());
+            Customer customer5 = new Customer("Savannah", "Pompson", "903 Geewiz Way", "45778", "(356) 432-7789", divisionRepository.findById(102L).get());
+            customerRepository.save(customer);
+            customerRepository.save(customer2);
+            customerRepository.save(customer3);
+            customerRepository.save(customer4);
+            customerRepository.save(customer5);
 
-            Customer graham = new Customer();
-            graham.setFirstName("Graham");
-            graham.setLastName("Cracker");
-            graham.setAddress("1234 Heresville Pl");
-            graham.setPostal_code("56789");
-            graham.setPhone("(123) 567-8293");
-            graham.setDivision(divisionRepository.getReferenceById(51L));
-
-            Customer beth = new Customer();
-            beth.setFirstName("Beth");
-            beth.setLastName("Howl");
-            beth.setAddress("900 Therestown Blvd");
-            beth.setPostal_code("23216");
-            beth.setPhone("(938) 849-8349");
-            beth.setDivision(divisionRepository.getReferenceById(52L));
-
-            Customer edna = new Customer();
-            edna.setFirstName("Edna");
-            edna.setLastName("Mae");
-            edna.setAddress("4829 VeryFarAway Ave");
-            edna.setPostal_code("89274");
-            edna.setPhone("(3214) 231-6543");
-            edna.setDivision(divisionRepository.getReferenceById(53L));
-
-            Customer sam = new Customer();
-            sam.setFirstName("Sam");
-            sam.setLastName("Tee");
-            sam.setAddress("80 WhereEvenIsThat Rd");
-            sam.setPostal_code("64346");
-            sam.setPhone("(875) 354-7675");
-            sam.setDivision(divisionRepository.getReferenceById(54L));
-
-            Customer savannah = new Customer();
-            savannah.setFirstName("Savannah");
-            savannah.setLastName("Pompson");
-            savannah.setAddress("903 Geewiz Way");
-            savannah.setPostal_code("43252");
-            savannah.setPhone("(745) 563-4342");
-            savannah.setDivision(divisionRepository.getReferenceById(55L));
-
-            customerRepository.save(graham);
-            customerRepository.save(beth);
-            customerRepository.save(edna);
-            customerRepository.save(sam);
-            customerRepository.save(savannah);
         }
     }
 }
