@@ -7,7 +7,6 @@ import com.d288.demo.entities.CartItem;
 import com.d288.demo.entities.Customer;
 import com.d288.demo.entities.StatusType;
 import jakarta.transaction.Transactional;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +16,12 @@ import java.util.UUID;
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
     private CustomerRepository customerRepository;
+    private CartRepository cartRepository;
 
     @Autowired
-    public CheckoutServiceImpl(CustomerRepository customerRepository) {
+    public CheckoutServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository) {
         this.customerRepository = customerRepository;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -42,6 +43,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         customer.getCarts().add(cart);
 
         customerRepository.save(customer);
+        cartRepository.save(cart);
 
         // order confirmation error message
         if (cartItems.isEmpty()){
