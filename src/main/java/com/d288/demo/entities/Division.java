@@ -19,17 +19,17 @@ public class Division {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "division_id")
+    @Column(name = "division_id", nullable = false)
     private Long id;
 
-    @Column(name = "division")
+    @Column(name = "division", nullable = false)
     private String division_name;
 
     @Column(name = "create_date")
     @CreationTimestamp
     private Date create_date;
 
-    @Column(name = "last_update")
+    @Column(name = "last_update", updatable = false)
     @UpdateTimestamp
     private Date last_update;
 
@@ -37,16 +37,14 @@ public class Division {
     @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
-    @Column(name = "country_id")
-    private long country_id;
+    @Column(name = "country_id", nullable = false)
+    private Long country_id;
 
     // TODO fix for front end not populating division
     public void setCountry(Country country) {
         setCountry_id(country.getId());
         this.country = country;
     }
-
-    /*
 
     public Division(String url){
         // this extracts the portion of the url containing the division id
@@ -56,7 +54,5 @@ public class Division {
         String divisionId = url.substring(url.lastIndexOf('/')+1);
         this.id = Long.parseLong(divisionId);
     }
-
-     */
 
 }

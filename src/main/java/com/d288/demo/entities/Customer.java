@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", nullable = false)
     private Long id;
 
     @Column(name = "customer_first_name", nullable = false)
@@ -39,7 +40,7 @@ public class Customer {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false)
     @CreationTimestamp
     private Date create_date;
 
@@ -54,7 +55,7 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Cart> carts;
+    private Set<Cart> carts = new HashSet<>();
 
     public Customer(String firstName, String lastName, String address, String postal_code, String phone, Division division) {
         this.firstName = firstName;
@@ -63,5 +64,9 @@ public class Customer {
         this.postal_code = postal_code;
         this.phone = phone;
         this.division = division;
+    }
+
+    public void add(Cart cart) {
+        carts.add(cart);
     }
 }
