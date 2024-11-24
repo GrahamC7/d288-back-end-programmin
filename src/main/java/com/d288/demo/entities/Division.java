@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "divisions")
@@ -54,5 +56,8 @@ public class Division {
         String divisionId = url.substring(url.lastIndexOf('/')+1);
         this.id = Long.parseLong(divisionId);
     }
+
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
+    private Set<Customer> customers = new HashSet<>();
 
 }
