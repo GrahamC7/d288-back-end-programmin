@@ -30,17 +30,22 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         // data retrieval
         Cart cart = purchase.getCart();
+        Customer customer = purchase.getCustomer();
+
+        Set<CartItem> cartItems = purchase.getCartItems();
 
         // tracking number generation
         String orderTrackingNumber = generateOrderTrackingNumber();
+
+        cartItems.forEach(item -> {
+            item.setCart(cart);
+            cart.add(item);
+        });
+
         cart.setOrderTrackingNumber(orderTrackingNumber);
-
-        Set<CartItem> cartItems = purchase.getCartItems();
-        cartItems.forEach(item -> cart.getCartItem().add(item));
         cart.setStatus(StatusType.ordered);
+        customer.add(cart);
 
-        Customer customer = purchase.getCustomer();
-        customer.getCarts().add(cart);
 
         customerRepository.save(customer);
         cartRepository.save(cart);
@@ -54,7 +59,6 @@ public class CheckoutServiceImpl implements CheckoutService {
     }
 
     private String generateOrderTrackingNumber() {
-        String orderTrackingNumber = UUID.randomUUID().toString();
-        return orderTrackingNumber;
+        return UUID.randomUUID().toString();
     }
 }
