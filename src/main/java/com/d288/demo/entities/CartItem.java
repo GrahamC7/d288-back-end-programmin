@@ -28,7 +28,7 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "vacation_id", referencedColumnName = "vacation_id", nullable = false)
-    private Vacation vacation;
+    private Vacations vacations;
 
     @ManyToMany
     @JoinTable(

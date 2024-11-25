@@ -16,7 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 
-public class Vacation {
+public class Vacations {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,8 @@ public class Vacation {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "travel_price", nullable = false)
-    private BigDecimal travel_price;
+    @Column(name = "travel_fare_price", nullable = false)
+    private BigDecimal travel_fare_price;
 
     @Column(name = "image_url")
     private String image_URL;
@@ -43,7 +43,7 @@ public class Vacation {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vacations", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Excursion> excursions = new HashSet<>();
 
 }

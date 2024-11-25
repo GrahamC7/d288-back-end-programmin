@@ -44,7 +44,7 @@ public class Excursion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacation_id", nullable = false)
-    private Vacation vacation;
+    private Vacations vacations;
 
     @ManyToMany
     @JoinTable(
