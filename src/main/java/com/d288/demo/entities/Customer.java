@@ -1,6 +1,5 @@
 package com.d288.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -67,7 +66,4 @@ public class Customer {
         this.division = division;
     }
 
-    public void add(Cart cart) {
-        carts.add(cart);
-    }
 }
