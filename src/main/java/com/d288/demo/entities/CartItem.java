@@ -32,11 +32,12 @@ public class CartItem {
 
     @ManyToMany
     @JoinTable(
-            name = "excursion_cartitem",
+            name="excursion_cartitem",
             joinColumns = @JoinColumn(name = "cart_item_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "excursion_id", nullable = false)
     )
-    private Set<Excursion> excursions = new HashSet<>();
+
+    private Set<CartItem> cartItems;
 
     @ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)

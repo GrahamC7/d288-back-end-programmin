@@ -49,10 +49,10 @@ public class Excursion {
     @ManyToMany
     @JoinTable(
             name="excursion_cartitem",
-            joinColumns = @JoinColumn(name = "excursion_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "cart_item_id", nullable = false)
+            joinColumns = @JoinColumn(name = "cart_item_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "excursion_id", nullable = false)
     )
 
-    private Set<CartItem> cartItems = new HashSet<>();
+    private Set<CartItem> cartItems;
 
 }
