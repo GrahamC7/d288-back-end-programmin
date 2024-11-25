@@ -43,7 +43,7 @@ public class Vacation {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(mappedBy = "vacation_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Excursion> excursions = new HashSet<>();
 
 }
