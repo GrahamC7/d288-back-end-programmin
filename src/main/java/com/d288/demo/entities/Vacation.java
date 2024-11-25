@@ -8,7 +8,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 
-public class Vacations {
+public class Vacation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +34,7 @@ public class Vacations {
     @Column(name = "image_url")
     private String image_URL;
 
-    @Column(name = "create_date", updatable = false)
+    @Column(name = "create_date")
     @CreationTimestamp
     private Date create_date;
 
@@ -43,7 +42,7 @@ public class Vacations {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(mappedBy = "vacations", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Excursion> excursions = new HashSet<>();
+    @OneToMany(mappedBy = "vacation")
+    private Set<Excursion> excursions;
 
 }

@@ -2,7 +2,6 @@ package com.d288.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,13 +15,12 @@ import java.util.Set;
 @Table(name = "excursions")
 @Getter
 @Setter
-//@NoArgsConstructor
 
 public class Excursion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "excursion_id", nullable = false, updatable = false)
+    @Column(name = "excursion_id", nullable = false)
     private Long id;
 
     @Column(name = "excursion_title", nullable = false)
@@ -44,15 +42,15 @@ public class Excursion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacation_id", nullable = false)
-    private Vacations vacations;
+    private Vacation vacation;
 
-    @ManyToMany
-    @JoinTable(
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "excursions")
+
+    /*@JoinTable(
             name="excursion_cartitem",
             joinColumns = @JoinColumn(name = "cart_item_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "excursion_id", nullable = false)
-    )
-
-    private Set<CartItem> cartItems;
+    )*/
+    private Set<CartItem> cartItems = new HashSet<>();
 
 }

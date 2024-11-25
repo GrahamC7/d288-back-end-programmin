@@ -37,6 +37,6 @@ public class Country {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = CascadeType.ALL)
-    private Set<Division> divisions = new HashSet<>();
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    private Set<Division> divisions;
 }

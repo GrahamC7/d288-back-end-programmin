@@ -1,23 +1,18 @@
 package com.d288.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "divisions")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class Division {
 
@@ -41,11 +36,12 @@ public class Division {
     @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
-    @Column(name = "country_id", nullable = false, updatable = false)
+    @Column(name = "country_id", nullable = false)
     private Long country_id;
 
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Customer> customers = new HashSet<>();
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
+    private Set<Customer> customers;
+
 
     // TODO fix for front end not populating division
     public void setCountry(Country country) {
@@ -53,7 +49,7 @@ public class Division {
         this.country = country;
     }
 
-    /*
+/*
     public Division(String url){
         // this extracts the portion of the url containing the division id
         // url might look something like
@@ -63,6 +59,5 @@ public class Division {
         this.id = Long.parseLong(divisionId);
     }
 
-     */
-
+ */
 }

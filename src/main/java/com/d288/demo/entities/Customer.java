@@ -1,9 +1,7 @@
 package com.d288.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,8 +14,6 @@ import java.util.Set;
 @Table(name = "customers")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class Customer {
 
@@ -50,12 +46,11 @@ public class Customer {
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name = "division_id", referencedColumnName = "division_id", nullable = false, updatable = false
-    )
+    @JoinColumn(name = "division_id", nullable = false, updatable = false)
     private Division division;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Cart> carts = new HashSet<>();
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<Cart> carts;
 
     public Customer(String firstName, String lastName, String address, String postal_code, String phone, Division division) {
         this.firstName = firstName;
@@ -66,4 +61,16 @@ public class Customer {
         this.division = division;
     }
 
+    public Customer() {
+    }
+
+    public void add(Cart cart) {
+        if (cart != null) {
+            if (carts == null) {
+                carts = new HashSet<>();
+            }
+            carts.add(cart);
+            cart.setCustomer(this);
+        }
+    }
 }

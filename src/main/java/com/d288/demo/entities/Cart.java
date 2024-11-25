@@ -44,7 +44,7 @@ public class Cart {
     @UpdateTimestamp
     private Date last_update;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
@@ -52,6 +52,12 @@ public class Cart {
     private Set<CartItem> cartItem = new HashSet<>();
 
     public void add(CartItem item) {
-        this.cartItem.add(item);
+        if(item != null) {
+            if(cartItem == null) {
+                cartItem = new HashSet<>();
+            }
+            cartItem.add(item);
+            item.setCart(this);
+        }
     }
 }

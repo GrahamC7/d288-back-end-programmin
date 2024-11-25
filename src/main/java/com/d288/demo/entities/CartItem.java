@@ -27,8 +27,8 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "vacation_id", referencedColumnName = "vacation_id", nullable = false)
-    private Vacations vacations;
+    @JoinColumn(name = "vacation_id", nullable = false)
+    private Vacation vacation;
 
     @ManyToMany
     @JoinTable(
@@ -36,10 +36,9 @@ public class CartItem {
             joinColumns = @JoinColumn(name = "cart_item_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "excursion_id", nullable = false)
     )
+    private Set<Excursion> excursions = new HashSet<>();
 
-    private Set<CartItem> cartItems;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
@@ -51,4 +50,8 @@ public class CartItem {
     @UpdateTimestamp
     private Date last_update;
 
+    public void addExcursion(Excursion excursion) {
+        this.excursions.add(excursion);
+        excursion.getCartItems().add(this);
+    }
 }

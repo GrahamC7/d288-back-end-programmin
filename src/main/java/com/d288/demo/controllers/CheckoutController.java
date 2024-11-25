@@ -18,8 +18,9 @@ public class CheckoutController {
     }
 
     @PostMapping("/purchase")
-    @CrossOrigin("http://localhost:4200")
     public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
-        return checkoutService.placeOrder(purchase);
+        PurchaseResponse purchaseResponse = checkoutService.placeOrder(purchase);
+
+        return purchaseResponse;
     }
 }
