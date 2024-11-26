@@ -30,7 +30,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         if (cartItems.isEmpty()) {
             cart.setStatus(StatusType.canceled);
-            return new PurchaseResponse("Purchase Failure: Customer field cannot be empty. Cart items cannot be empty.");
+            return new PurchaseResponse("Purchase Failure: Cart Empty");
         }
 
         String orderTrackingNumber = generateOrderTrackingNumber();
