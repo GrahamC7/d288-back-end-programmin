@@ -1,12 +1,9 @@
 package com.d288.demo.services;
 
-import com.d288.demo.dao.CartItemRepository;
+
 import com.d288.demo.dao.CartRepository;
-import com.d288.demo.dao.CustomerRepository;
-import com.d288.demo.dao.ExcursionRepository;
 import com.d288.demo.entities.Cart;
 import com.d288.demo.entities.CartItem;
-import com.d288.demo.entities.Customer;
 import com.d288.demo.entities.StatusType;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -18,52 +15,36 @@ import java.util.UUID;
 public class CheckoutServiceImpl implements CheckoutService {
 
     private CartRepository cartRepository;
-    private CustomerRepository customerRepository;
-    private CartItemRepository cartItemRepository;
-    private ExcursionRepository excursionRepository;
 
-    public CheckoutServiceImpl(CartRepository cartRepository, CustomerRepository customerRepository, CartItemRepository cartItemRepository, ExcursionRepository excursionRepository) {
+    public CheckoutServiceImpl(CartRepository cartRepository) {
 
         this.cartRepository = cartRepository;
-        this.customerRepository = customerRepository;
-        this.cartItemRepository = cartItemRepository;
-        this.excursionRepository = excursionRepository;
     }
 
     @Override
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
 
-        try {
-            // data retrieval
-            Cart cart = purchase.getCart();
+        Cart cart = purchase.getCart();
+        Set<CartItem> cartItems = purchase.getCartItems();
 
-            Set<CartItem> cartItems = purchase.getCartItems();
-            cartItems.forEach(item -> item.setCart(cart));
-
-            cart.setCartItem(cartItems);
-
-            // tracking number generation
-            String orderTrackingNumber = generateOrderTrackingNumber();
-            cart.setOrderTrackingNumber(orderTrackingNumber);
-
-            Customer customer = purchase.getCustomer();
-            cart.setCustomer(customer);
-
-            customerRepository.save(customer);
-            cartRepository.save(cart);
-
-            cart.setStatus(StatusType.ordered);
-
-            // order confirmation error message
-            if (customer == null || cartItems.isEmpty()) {
-                throw new IllegalArgumentException("Purchase Failure: Customer field cannot be empty. Cart items cannot be empty.");
-            }
-
-            return new PurchaseResponse(orderTrackingNumber);
-        } catch (Exception e) {
-            return new PurchaseResponse(e.getMessage());
+        if (cartItems.isEmpty()) {
+            cart.setStatus(StatusType.canceled);
+            return new PurchaseResponse("Purchase Failure: Customer field cannot be empty. Cart items cannot be empty.");
         }
+
+        String orderTrackingNumber = generateOrderTrackingNumber();
+        cart.setOrderTrackingNumber(orderTrackingNumber);
+
+        cartItems.forEach(item -> {
+            cart.add(item);
+        });
+
+        cart.setStatus(StatusType.ordered);
+
+        cartRepository.save(cart);
+
+        return new PurchaseResponse(orderTrackingNumber);
     }
 
     private String generateOrderTrackingNumber() {
