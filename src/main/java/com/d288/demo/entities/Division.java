@@ -40,7 +40,7 @@ public class Division {
     private Long country_id;
 
     @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
-    private Set<Customer> customers;
+    private Set<Customer> customer;
 
 
     // TODO fix for front end not populating division

@@ -57,7 +57,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
             // order confirmation error message
             if (customer == null || cartItems.isEmpty()) {
-                throw new IllegalArgumentException("Customer field cannot be empty. Cart items cannot be empty.");
+                throw new IllegalArgumentException("Purchase Failure: Customer field cannot be empty. Cart items cannot be empty.");
             }
 
             return new PurchaseResponse(orderTrackingNumber);
