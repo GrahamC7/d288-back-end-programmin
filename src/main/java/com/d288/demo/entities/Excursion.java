@@ -46,6 +46,8 @@ public class Excursion {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "excursions")
 
+    // public Excursion () {}
+
     /*@JoinTable(
             name="excursion_cartitem",
             joinColumns = @JoinColumn(name = "cart_item_id", nullable = false),

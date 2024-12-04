@@ -51,6 +51,8 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CartItem> cartItem = new HashSet<>();
 
+    public Cart() {}
+
     public void add(CartItem item) {
         if(item != null) {
             if(cartItem == null) {

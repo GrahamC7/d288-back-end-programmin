@@ -42,6 +42,8 @@ public class Division {
     @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
     private Set<Customer> customer;
 
+    public Division() {}
+
 
     // TODO fix for front end not populating division
     public void setCountry(Country country) {
@@ -49,7 +51,7 @@ public class Division {
         this.country = country;
     }
 
-/*
+
     public Division(String url){
         // this extracts the portion of the url containing the division id
         // url might look something like
@@ -59,5 +61,5 @@ public class Division {
         this.id = Long.parseLong(divisionId);
     }
 
- */
+
 }

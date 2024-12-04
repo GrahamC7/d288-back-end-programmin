@@ -52,6 +52,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Cart> carts;
 
+    public Customer() {
+    }
     public Customer(String firstName, String lastName, String address, String postal_code, String phone, Division division) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,9 +61,6 @@ public class Customer {
         this.postal_code = postal_code;
         this.phone = phone;
         this.division = division;
-    }
-
-    public Customer() {
     }
 
     public void add(Cart cart) {

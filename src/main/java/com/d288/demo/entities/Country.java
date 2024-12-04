@@ -16,7 +16,6 @@ import java.util.Set;
 @Table(name = "countries")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 
 public class Country {
@@ -39,4 +38,6 @@ public class Country {
 
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     private Set<Division> divisions;
+
+    public Country(){}
 }

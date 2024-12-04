@@ -16,7 +16,6 @@ import java.util.Set;
 @Table(name = "cart_items")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 
 public class CartItem {
@@ -49,6 +48,8 @@ public class CartItem {
     @Column(name = "last_update")
     @UpdateTimestamp
     private Date last_update;
+
+    public CartItem() {}
 
     public void addExcursion(Excursion excursion) {
         this.excursions.add(excursion);
